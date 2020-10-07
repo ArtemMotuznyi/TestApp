@@ -1,3 +1,2 @@
-include ':networkStateManager'
 include ':app'
 rootProject.name = "PikabuFeed"
