@@ -47,3 +47,14 @@ sealed class ActionResult<out R> {
         return Success(join(mainData, joinWithData))
     }
 }
+
+suspend fun <T> ActionResult<T>.onError(action: suspend () -> ActionResult<T>): ActionResult<T> =
+    try {
+        when (this) {
+            is ActionResult.Error -> action()
+            is ActionResult.Success -> this
+        }
+    } catch (e: Exception) {
+        ActionResult.Error(e)
+    }
+

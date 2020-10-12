@@ -5,7 +5,9 @@ import com.developerartemmotuznyi.pikabufeed.data.local.base.execute
 import com.developerartemmotuznyi.pikabufeed.data.local.model.PostEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class RoomFeedDataSource @Inject constructor(
     private val postsDao: PostsDao
 ) : LocalFeedDataSource {
@@ -20,4 +22,7 @@ class RoomFeedDataSource @Inject constructor(
 
     override suspend fun loadPosts(): ActionResult<List<PostEntity>> =
         postsDao.execute { getAllPosts() }
+
+    override suspend fun getPost(id: Long): ActionResult<PostEntity> =
+        postsDao.execute { getPost(id) }
 }

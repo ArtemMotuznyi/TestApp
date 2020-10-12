@@ -1,3 +1,10 @@
 <resources>
-	<string name="app_name">PikabuFeed</string>
+    <string name="app_name">Pikabu</string>
+
+    <string name="feed_title">Лента</string>
+    <string name="saved_post_title">Сохраненные</string>
+
+    <string name="feed_empty_saved_description">Сохраненных постов нету</string>
+    <string name="feed_empty_loaded_description">Проблемы с соединением, проверьте интернет</string>
+    <string name="feed_empty_loaded_action">Попробовать заново</string>
 </resources>

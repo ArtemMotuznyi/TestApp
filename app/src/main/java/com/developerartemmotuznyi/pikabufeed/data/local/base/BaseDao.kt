@@ -4,7 +4,7 @@ import com.developerartemmotuznyi.pikabufeed.core.ActionResult
 
 interface BaseDao
 
-suspend inline fun <T : BaseDao, DataType> T.execute(crossinline block: suspend T.() -> DataType): ActionResult<DataType> =
+suspend inline fun <T : BaseDao, DataType> T.execute(block: T.() -> DataType): ActionResult<DataType> =
     try {
         ActionResult.Success(block())
     } catch (e: Exception) {

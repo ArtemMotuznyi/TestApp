@@ -23,5 +23,8 @@ interface PostsDao : BaseDao {
     @Query("SELECT * FROM postentity")
     fun getAllPosts(): List<PostEntity>
 
+    @Query("SELECT * FROM postentity WHERE id = :id")
+    fun getPost(id: Long): PostEntity
+
 
 }

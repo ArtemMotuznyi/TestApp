@@ -1,6 +1,7 @@
 package com.developerartemmotuznyi.pikabufeed.data.repository
 
 import com.developerartemmotuznyi.pikabufeed.core.ActionResult
+import com.developerartemmotuznyi.pikabufeed.core.onError
 import com.developerartemmotuznyi.pikabufeed.data.local.model.PostEntity
 import com.developerartemmotuznyi.pikabufeed.data.local.model.toDomain
 import com.developerartemmotuznyi.pikabufeed.data.local.source.LocalFeedDataSource
@@ -8,7 +9,7 @@ import com.developerartemmotuznyi.pikabufeed.data.network.model.PostResponse
 import com.developerartemmotuznyi.pikabufeed.data.network.model.toDomain
 import com.developerartemmotuznyi.pikabufeed.data.network.source.RemoteFeedDataSource
 import com.developerartemmotuznyi.pikabufeed.domain.model.Post
-import com.developerartemmotuznyi.pikabufeed.domain.model.repository.FeedRepository
+import com.developerartemmotuznyi.pikabufeed.domain.repository.FeedRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
@@ -46,5 +47,11 @@ class DefaultFeedRepository @Inject constructor(
 
     override suspend fun removePost(post: Post): ActionResult<Unit> = withContext(Dispatchers.IO) {
         localFeedDataSource.deletePost(post.id)
+    }
+
+    override suspend fun getPost(id: Long): ActionResult<Post> = withContext(Dispatchers.IO) {
+        localFeedDataSource.getPost(id)
+            .transform { it.toDomain() }
+            .onError { remoteFeedDataSource.getPost(id).transform { it.toDomain(false) } }
     }
 }

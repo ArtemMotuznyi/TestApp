@@ -1,4 +1,4 @@
-package com.developerartemmotuznyi.pikabufeed.domain.model.repository
+package com.developerartemmotuznyi.pikabufeed.domain.repository
 
 import com.developerartemmotuznyi.pikabufeed.core.ActionResult
 import com.developerartemmotuznyi.pikabufeed.domain.model.Post
@@ -13,5 +13,7 @@ interface FeedRepository {
     suspend fun savePost(post: Post): ActionResult<Unit>
 
     suspend fun removePost(post: Post): ActionResult<Unit>
+
+    suspend fun getPost(id: Long): ActionResult<Post>
 
 }

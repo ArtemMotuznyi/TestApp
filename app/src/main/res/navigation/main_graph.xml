@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.developerartemmotuznyi.pikabufeed.presentation.ui.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/navigate_to_post_detail"
+            app:destination="@id/post_detail" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/post_detail"
+        android:name="com.developerartemmotuznyi.pikabufeed.presentation.ui.post.PostDetailFragment"
+        tools:layout="@layout/fragment_post_detail">
+
+        <argument
+            android:name="post_id"
+            app:argType="long" />
+
+    </fragment>
+
+
+</navigation>

@@ -14,4 +14,6 @@ interface LocalFeedDataSource {
 
     suspend fun loadPosts(): ActionResult<List<PostEntity>>
 
+    suspend fun getPost(id: Long): ActionResult<PostEntity>
+
 }

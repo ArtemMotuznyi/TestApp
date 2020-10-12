@@ -5,7 +5,7 @@ import com.developerartemmotuznyi.pikabufeed.core.ActionResult
 
 interface BaseApi
 
-suspend inline fun <T : BaseApi, DataType> T.execute(crossinline block: suspend T.() -> DataType): ActionResult<DataType> =
+inline fun <T : BaseApi, DataType> T.execute(block: T.() -> DataType): ActionResult<DataType> =
     try {
         ActionResult.Success(block())
     } catch (e: Exception) {
